@@ -1,0 +1,12 @@
+﻿@model IEnumerable<MvcProjectAli.Models.Tourist>
+@{
+    ViewBag.Title = "Partial_View";
+}
+
+<h2>Partial_Test</h2>
+
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_Tourist", item)
+}

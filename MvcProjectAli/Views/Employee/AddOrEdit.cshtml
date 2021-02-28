@@ -1,0 +1,95 @@
+﻿@model MvcProjectAli.Models.Employee
+
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = null;
+}
+
+
+
+@using (Html.BeginForm("AddOrEdit", "Employee", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "Employee", new { id = 0 }) }))//data-resetUrl
+{
+    @Html.AntiForgeryToken()
+    <div class="row" style="background-color:aliceblue">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.EmployeeID)
+            @Html.HiddenFor(model => model.ImagePath)
+
+            <div class="col-md-6">
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { placeholder = "input your name", @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "input your name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Position, new { placeholder = "input your position", @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Position, new { htmlAttributes = new { placeholder = "input your position", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Position)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Office, new { placeholder = "input your office name", @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Office, new { htmlAttributes = new { placeholder = "input your office name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Office)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Salary, new { placeholder = "input your payment", @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { placeholder = "input your payment", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Salary)
+                    </div>
+                </div>
+
+                @*=======================================================================================*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { placeholder = "password", @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "password", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { placeholder = "password", @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { placeholder = "sure password", @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = "sure password", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { placeholder = "sure password", @class = "text-danger" })
+                    </div>
+                </div>
+                @*=======================================================================================*@
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ImagePath, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10" style="padding-left:50px;">
+                            <img src="@Url.Content(Model.ImagePath)" style="margin:10px" height="150" width="150" id="imagePreview" />
+                            <input type="file" name="ImageUpload" accept="image/jpeg, image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        @if (Model.EmployeeID != 0)
+                        {
+                            <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Employee",new{id=0})',false)"><i class="fa fa-plus"></i> Add New</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+}

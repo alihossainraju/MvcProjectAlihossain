@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<MvcProjectAli.Models.Chef>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center"><u>Chef's Information</u></h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Find By Chef Name: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+    }
+
+    <table class="table">
+        <tr style="background-color:antiquewhite;">
+            <th style="background-color:aliceblue;">
+                @Html.ActionLink("ChefName", "Index", new { sortOrder = ViewBag.NameSortParam })
+            </th>
+            <th>
+                Cell Phone No.
+            </th>
+            <th style="background-color:aliceblue;">
+                Email Address
+            </th>
+            <th>
+                Contact Address
+            </th>
+            <th style="background-color:aliceblue;">
+                Action
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChefName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CellPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactAddress)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ChefID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ChefID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ChefID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+   new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }
+   ))
+</div>

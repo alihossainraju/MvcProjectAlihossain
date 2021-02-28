@@ -1,0 +1,101 @@
+﻿@model MvcProjectAli.Models.Tourist
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#hotelInfo").click(function () {
+            $.ajax({
+                url: "@Url.Action("Hotel", "Tourist", new { id=Model.TouristId})",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#hoteldisplay table tbody").empty;
+                    for (var i = 0; i < result.length; i++) {
+                        $("#hoteldisplay table tbody").append("<tr><td>" + result[i].hotelName + "</td><td>" + result[i].joinDate + "</td><td>" + result[i].releaseDate + "</td><td>" + result[i].totalCost + "</td></tr>");
+                    }
+                    $("#hoteldisplay").show();
+                }
+            });
+            this.disabled = true;
+        })
+    })
+</script>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>Tourist Information</legend>
+
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.TouristName)
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.TouristName)
+                </span>
+                <br />
+
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.RoomType)
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.RoomType)
+                </span>
+                <br />
+
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.Contact)
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.Contact)
+                </span>
+                <br />
+
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.Email)
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.Email)
+                </span>
+                <br />
+
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.DateOfBirth)
+                </span>
+
+            </fieldset>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TouristId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <button class="btn btn-info" id="hotelInfo" data-exam-id="@Model.TouristId">Hotel Details</button>
+            </div>
+            <div id="hoteldisplay" style="display:none">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>Hotel Name</tr>
+                        <tr>Join Date</tr>
+                        <tr>Release Date</tr>
+                        <tr>Total Cost</tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

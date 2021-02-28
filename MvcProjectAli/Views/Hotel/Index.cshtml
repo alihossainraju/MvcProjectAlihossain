@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MvcProjectAli.Models.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<h2 align="center"><u>Hotel Information</u></h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr style="background-color:antiquewhite;">
+        <th>
+            @Html.DisplayNameFor(model => model.HotelName)
+        </th>
+        <th style="background-color:aliceblue;">
+            @Html.DisplayNameFor(model => model.JoinDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th style="background-color:aliceblue;">
+            @Html.DisplayNameFor(model => model.RoomCharge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceCharge)
+        </th>
+        <th style="background-color:aliceblue;">
+            @Html.DisplayNameFor(model => model.FoodCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th style="background-color:aliceblue;">
+            @Html.DisplayNameFor(model => model.Tourist.TouristName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JoinDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomCharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceCharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tourist.TouristName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.HotelID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.HotelID })
+            </td>
+        </tr>
+    }
+
+</table>

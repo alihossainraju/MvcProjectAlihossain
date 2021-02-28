@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MvcProjectAli.Models.Tourist>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<h2 align="center"><u>Tourist Information</u></h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" >
+    <tr style="background-color:antiquewhite;">
+        <th>
+            @Html.DisplayNameFor(model => model.TouristName)
+        </th>
+        <th style="background-color:aliceblue;">
+            @Html.DisplayNameFor(model => model.RoomType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact)
+        </th>
+        <th style="background-color:aliceblue;">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th >
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+
+        <th style="background-color:aliceblue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TouristName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TouristId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TouristId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TouristId })
+            </td>
+        </tr>
+    }
+
+</table>
